@@ -1,6 +1,6 @@
-$.get('http://localhost:3000/products',function (response){
+$.get('http://localhost:3000/products.html',function (response){
     response.forEach(function (prod){
-        new Product(prod.name, prod.product_img, prod.price);
+        new Product(prod.product_name, prod.product_img, prod.product_price);
     })
 });
 
@@ -12,25 +12,40 @@ class Product{
             this.name = name;
             this.image = image;
             this.price = price;
-            this.body = document.body;
+            this.parent = document.getElementById('zone');
+            this.create();
+            this.setAttr();
+            this.append();
+            this.fill();
             products.push(this);
         }
 
         create(){
-            this.title = document.createElement('div');
-
+            this.container1 = document.createElement('div');
+            this.nom = document.createElement('h2');
+            this.img = document.createElement('img');
+            this.prc = document.createElement('p');
+            this.button = document.createElement('button');
         }
 
-        setAtt(){
-            this.title.setAttribute('id', 'title1');
+        setAttr(){
+            this.container1.setAttribute('id', 'container1');
+            this.img.setAttribute('src', this.image);
+            
         }
         
         append(){
-            this.body.appendChild(this.title);
-            this.title.appendChild()
+           this.parent.appendChild(this.container1);
+           this.container1.appendChild(this.nom);
+           this.container1.appendChild(this.img);
+           this.container1.appendChild(this.prc);
+           this.container1.appendChild(this.button);
         }
 
         fill(){
-
+            this.nom.innerHTML = this.name;
+            this.img.innerHTML = this.image;
+            this.prc.innerHTML = this.price;
+            this.button.innerHTML = "Buy";
         }
 }
